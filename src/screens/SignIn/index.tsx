@@ -34,8 +34,15 @@ export function SignIn() {
     })
   }
 
-  async function handleSingInWithEmailAndPassword(){
-    const { user } = await auth().signInWithEmailAndPassword(email, password);
+function handleSingInWithEmailAndPassword(){
+    auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(({ user }) => console.log(user))
+    .catch(error => {
+      if(error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password'){
+        Alert.alert('Usuário não encontrado. E-mail e/ou senha inválida!');
+      }
+    })
   }
 
   return (
