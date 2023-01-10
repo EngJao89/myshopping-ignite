@@ -34,7 +34,7 @@ export function SignIn() {
     })
   }
 
-function handleSingInWithEmailAndPassword(){
+  function handleSingInWithEmailAndPassword(){
     auth()
     .signInWithEmailAndPassword(email, password)
     .then(({ user }) => console.log(user))
@@ -43,6 +43,12 @@ function handleSingInWithEmailAndPassword(){
         Alert.alert('Usuário não encontrado. E-mail e/ou senha inválida!');
       }
     })
+  }
+
+  function handleForgotPassword(){
+    auth()
+    .sendPasswordResetEmail(email)
+    .then(() => Alert.alert('Enviamos um link no seu e-mail para você redefinir sua senha.'))
   }
 
   return (
@@ -65,7 +71,7 @@ function handleSingInWithEmailAndPassword(){
       <Button title="Entrar" onPress={handleSingInWithEmailAndPassword} />
 
       <Account>
-        <ButtonText title="Recuperar senha" onPress={() => { }} />
+        <ButtonText title="Recuperar senha" onPress={handleForgotPassword} />
         <ButtonText title="Criar minha conta" onPress={handleCreateUserAccount} />
       </Account>
     </Container>
